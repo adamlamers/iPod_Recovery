@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="Dialogs.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="712" topLine="0" />
+	</File>
+	<File name="Dialogs.h" open="0" top="0" tabpos="0">
+		<Cursor position="226" topLine="0" />
+	</File>
+	<File name="iphone.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="716" topLine="0" />
+	</File>
+	<File name="iphone.h" open="0" top="0" tabpos="0">
+		<Cursor position="99" topLine="0" />
+	</File>
+	<File name="itdb.h" open="0" top="0" tabpos="0">
+		<Cursor position="1497" topLine="15" />
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="492" topLine="0" />
+	</File>
+	<File name="resource.h" open="0" top="0" tabpos="0">
+		<Cursor position="66" topLine="0" />
+	</File>
+	<File name="resource.rc" open="0" top="0" tabpos="1">
+		<Cursor position="1925" topLine="35" />
+	</File>
+	<File name="tungsten.h" open="0" top="0" tabpos="0">
+		<Cursor position="1600" topLine="57" />
+	</File>
+	<File name="util.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="212" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

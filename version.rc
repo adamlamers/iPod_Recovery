@@ -1,0 +1,34 @@
+#include <winresrc.h>
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,2,42
+ PRODUCTVERSION 1,0,2,42
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Millennium Softworks"
+            VALUE "FileDescription", "iPod Music Recovery"
+            VALUE "FileVersion", "0.0.1"
+            VALUE "InternalName", "iPod_Recovery.exe"
+            VALUE "LegalCopyright", "(c) Millennium Softworks.  All rights reserved."
+            VALUE "OriginalFilename", "iPod_Recovery.exe"
+            VALUE "ProductName", "iPod Music Recovery"
+            VALUE "ProductVersion", "0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
