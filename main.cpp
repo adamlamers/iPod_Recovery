@@ -1,6 +1,6 @@
 /* File: Dialogs.cpp
- * Creation Date: 12/23/2009 3:11PM
- * Last Modified Date: 12/23/2009 5:17PM
+ * Creation Date: 12/23/2009
+ * Last Modified Date: 2/19/2010
  * Version: 0.0.1
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
@@ -14,14 +14,18 @@
 #include "iphone.h"
 #include "util.h"
 #include <iostream>
+#include <commctrl.h>
 
+#define IDC_STATUSBAR 790
 #define IDM_CONTEXTSAVESONG 789
+#define IDM_CONTEXTCHECKSELECTED 791
+#define IDM_CONTEXTUNCHECKSELECTED 792
 
 HINSTANCE hInst;
 
 HWND SongList;
 HWND SearchBox;
-HWND SongCountLabel;
+HWND StatusBar;
 
 HWND musicRadioButton;
 HWND videoRadioButton;
@@ -29,6 +33,7 @@ HWND videoRadioButton;
 HMENU SongListContextMenu;
 
 int DisplayType = 0;
+int songCount = 0;
 
 
 BOOL ListViewAddColumn(HWND listview, int colIndex, char *headerText, int colWidth)
@@ -55,6 +60,8 @@ BOOL InitSongList(HWND hwndDlg)
     
     SongListContextMenu = CreatePopupMenu();
     InsertMenu(SongListContextMenu, 0, MF_BYPOSITION | MF_STRING, IDM_CONTEXTSAVESONG, "Save Song...");
+    InsertMenu(SongListContextMenu, 1, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Check Selected Items");
+    InsertMenu(SongListContextMenu, 2, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Uncheck Selected Items");
     
     return TRUE;
 }
@@ -90,6 +97,11 @@ BOOL SongListAddRow(HWND listview, char *name, char *artist, char *album, char *
     item.pszText = genre;
     ListView_SetItem(listview, &item);
     
+    char statusText[256];
+    songCount++;
+    sprintf(statusText, "%d Items", songCount);
+    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)statusText);
+    
     return TRUE;
 }
 
@@ -104,7 +116,7 @@ BOOL ScaleSongList(HWND hwndDlg)
                         0,
                         25,
                         width - 16,
-                        height - 151,
+                        height - 103,
                         SWP_NOZORDER);
 }
 
@@ -126,6 +138,36 @@ BOOL SetWindowIcon(HWND hwnd, HICON icon)
     return (SetClassLong(hwnd, GCL_HICON, (LONG)icon) != 0);
 }
 
+BOOL InitStatusBar(HWND hwndDlg)
+{
+    int parts[] = {100, 220, -1};
+    StatusBar = CreateWindowEx(0, STATUSCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0, hwndDlg, (HMENU)IDC_STATUSBAR, GetModuleHandle(NULL), NULL);
+    SendMessage(StatusBar, SB_SETPARTS, sizeof(parts) / sizeof(int), (LPARAM)parts);
+    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)0, (LPARAM)"Disconnected");
+    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)"");
+    return TRUE;
+}
+
+void SongListCheckSelectedItems(bool check)
+{
+    int ItemCount = ListView_GetItemCount(SongList);
+    int i;
+    for(i = 0; i < ItemCount; i++)
+    {
+        LVITEM item;
+        item.iItem = i;
+        item.mask = LVIF_STATE;
+        item.stateMask = LVIS_SELECTED;
+        if(ListView_GetItem(SongList, &item))
+        {
+            if(item.state & LVIS_SELECTED)
+            {
+                ListView_SetCheckState(SongList, item.iItem, check);
+            }
+        }
+    }
+}
+
 BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch(uMsg)
@@ -136,9 +178,9 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
             SetWindowIcon(hwndDlg, AppIcon);
             InitSongList(hwndDlg);
             ScaleSongList(hwndDlg);
-            SongCountLabel = GetDlgItem(hwndDlg, IDC_SONGCOUNTLABEL);
             InitSearchBox(hwndDlg);
             InitiPhone(hwndDlg);
+            InitStatusBar(hwndDlg);
             return TRUE;
 
         case WM_CLOSE:
@@ -147,6 +189,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
         
         case WM_SIZE:
             ScaleSongList(hwndDlg);
+            SendMessage(StatusBar, WM_SIZE, 0, 0);
             return TRUE;
 
         case WM_COMMAND:
@@ -201,6 +244,14 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     MessageBox(NULL, "Context Save Song", "", MB_OK);
                 return TRUE;
                 
+                case IDM_CONTEXTCHECKSELECTED:
+                    SongListCheckSelectedItems(true);
+                return TRUE;
+                
+                case IDM_CONTEXTUNCHECKSELECTED:
+                    SongListCheckSelectedItems(false);
+                return TRUE;
+                
                 case IDM__EXIT1:
                     SendMessage(hwndDlg, WM_CLOSE, 0, 0);
                 return TRUE;
@@ -216,8 +267,33 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                             {
                                 POINT mouse;
                                 GetCursorPos(&mouse);
+                                if(ListView_GetSelectedCount(SongList) > 1)
+                                {
+                                    EnableMenuItem(SongListContextMenu, 1, MF_BYPOSITION | MF_ENABLED);
+                                    EnableMenuItem(SongListContextMenu, 2, MF_BYPOSITION | MF_ENABLED);
+                                }
+                                else
+                                {
+                                    EnableMenuItem(SongListContextMenu, 1, MF_BYPOSITION | MF_GRAYED);
+                                    EnableMenuItem(SongListContextMenu, 2, MF_BYPOSITION | MF_GRAYED);
+                                }
                                 TrackPopupMenu(SongListContextMenu, TPM_TOPALIGN | TPM_LEFTALIGN, mouse.x, mouse.y, 0, hwndDlg, (RECT*)NULL);
                             }
+                        break;
+                        
+                        case LVN_COLUMNCLICK:
+                        {
+                            NMLISTVIEW *arg = (LPNMLISTVIEW)lParam;
+                            switch(arg->iSubItem)
+                            {
+                                case 0: //Checkboxes, do nothing
+                                case 1: //Name
+                                case 2: //Artist
+                                case 3: //Album
+                                case 4: //Genre
+                                break;
+                            }
+                        }
                         break;
                     }
                 break;
@@ -232,5 +308,9 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
     hInst = hInstance;
+    INITCOMMONCONTROLSEX InitCtrls;
+    InitCtrls.dwICC = ICC_LISTVIEW_CLASSES | ICC_BAR_CLASSES;
+    InitCtrls.dwSize = sizeof(INITCOMMONCONTROLSEX);
+    InitCommonControlsEx(&InitCtrls);
     return DialogBox(hInstance, MAKEINTRESOURCE(IDD_MAIN), NULL, DialogProc);
 }
