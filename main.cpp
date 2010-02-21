@@ -1,6 +1,6 @@
 /* File: Dialogs.cpp
  * Creation Date: 12/23/2009
- * Last Modified Date: 2/19/2010
+ * Last Modified Date: 2/21/2010
  * Version: 0.0.1
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
@@ -8,22 +8,20 @@
 #define _WIN32_WINNT 0x500
 #define _WIN32_IE 0x600
 #include <windows.h>
+#include <iostream>
+#include <commctrl.h>
 #include "Dialogs.h"
 #include "resource.h"
 #include "itdb.h"
 #include "iphone.h"
+#include "listview.h"
 #include "util.h"
-#include <iostream>
-#include <commctrl.h>
-
-#define IDC_STATUSBAR 790
-#define IDM_CONTEXTSAVESONG 789
-#define IDM_CONTEXTCHECKSELECTED 791
-#define IDM_CONTEXTUNCHECKSELECTED 792
+#include "resource2.h"
+#include "songlist.h"
 
 HINSTANCE hInst;
 
-HWND SongList;
+CSongList *SongList;
 HWND SearchBox;
 HWND StatusBar;
 
@@ -35,18 +33,6 @@ HMENU SongListContextMenu;
 int DisplayType = 0;
 int songCount = 0;
 
-
-BOOL ListViewAddColumn(HWND listview, int colIndex, char *headerText, int colWidth)
-{
-    LVCOLUMN lvc;
-    memset(&lvc, 0, sizeof(lvc));
-    lvc.mask = LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
-    lvc.iSubItem = colIndex;
-    lvc.pszText = headerText;
-    lvc.cx = colWidth;
-    if(ListView_InsertColumn(listview, colIndex, &lvc) == -1) return FALSE;
-    return TRUE;
-}
 
 BOOL InitSongList(HWND hwndDlg)
 {
@@ -119,7 +105,7 @@ BOOL ScaleSongList(HWND hwndDlg)
                         height - 103,
                         SWP_NOZORDER);
 }
-
+*/
 BOOL InitSearchBox(HWND hwndDlg)
 {
     SearchBox = GetDlgItem(hwndDlg, IDC_SEARCH);
@@ -148,26 +134,6 @@ BOOL InitStatusBar(HWND hwndDlg)
     return TRUE;
 }
 
-void SongListCheckSelectedItems(bool check)
-{
-    int ItemCount = ListView_GetItemCount(SongList);
-    int i;
-    for(i = 0; i < ItemCount; i++)
-    {
-        LVITEM item;
-        item.iItem = i;
-        item.mask = LVIF_STATE;
-        item.stateMask = LVIS_SELECTED;
-        if(ListView_GetItem(SongList, &item))
-        {
-            if(item.state & LVIS_SELECTED)
-            {
-                ListView_SetCheckState(SongList, item.iItem, check);
-            }
-        }
-    }
-}
-
 BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch(uMsg)
@@ -176,8 +142,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
             
             HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_APPICON));
             SetWindowIcon(hwndDlg, AppIcon);
-            InitSongList(hwndDlg);
-            ScaleSongList(hwndDlg);
+            SongList = new CSongList(hwndDlg);
             InitSearchBox(hwndDlg);
             InitiPhone(hwndDlg);
             InitStatusBar(hwndDlg);
@@ -188,7 +153,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
             return TRUE;
         
         case WM_SIZE:
-            ScaleSongList(hwndDlg);
+            SongList->Scale();
             SendMessage(StatusBar, WM_SIZE, 0, 0);
             return TRUE;
 
@@ -245,11 +210,11 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 return TRUE;
                 
                 case IDM_CONTEXTCHECKSELECTED:
-                    SongListCheckSelectedItems(TRUE);
+                    SongList->CheckSelectedItems(true);
                 return TRUE;
                 
                 case IDM_CONTEXTUNCHECKSELECTED:
-                    SongListCheckSelectedItems(FALSE);
+                    SongList->CheckSelectedItems(false);
                 return TRUE;
                 
                 case IDM__EXIT1:
@@ -265,19 +230,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         case NM_RCLICK:
                             if(((LPNMHDR)lParam)->idFrom == IDC_SONGLIST)
                             {
-                                POINT mouse;
-                                GetCursorPos(&mouse);
-                                if(ListView_GetSelectedCount(SongList) > 1)
-                                {
-                                    EnableMenuItem(SongListContextMenu, 1, MF_BYPOSITION | MF_ENABLED);
-                                    EnableMenuItem(SongListContextMenu, 2, MF_BYPOSITION | MF_ENABLED);
-                                }
-                                else
-                                {
-                                    EnableMenuItem(SongListContextMenu, 1, MF_BYPOSITION | MF_GRAYED);
-                                    EnableMenuItem(SongListContextMenu, 2, MF_BYPOSITION | MF_GRAYED);
-                                }
-                                TrackPopupMenu(SongListContextMenu, TPM_TOPALIGN | TPM_LEFTALIGN, mouse.x, mouse.y, 0, hwndDlg, (RECT*)NULL);
+                                SongList->ShowContextMenu();
                             }
                         break;
                         

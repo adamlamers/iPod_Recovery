@@ -1,11 +1,27 @@
+/* File: iphone.cpp
+ * Creation Date: 2/4/2010
+ * Last Modified Date: 2/21/2010
+ * Version: 0.0.1
+ * Contact: Adam Lamers <adam@millenniumsoftworks.com>
+*/
+
 #include "tungsten.h"
 #include "itdb.h"
 #include "glib.h"
 #include <windows.h>
 #include <commctrl.h>
+#include "songlist.h"
 
-extern HWND SongList;
-extern BOOL SongListAddRow(HWND listview, char *name, char *artist, char *album, char *genre);
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+extern void __declspec(dllimport) ConvertiTunesCDB(char *filePath, char *newFilePath);
+#ifdef __cplusplus
+}
+#endif
+
+extern CSongList *SongList;
 extern int DisplayType;
 extern HWND StatusBar;
 
@@ -23,7 +39,7 @@ void FetchITunesDB()
     {
         track = (Itdb_Track*)tracks->data;
         //if(track->mediatype & ITDB_MEDIATYPE_AUDIO)
-            SongListAddRow(SongList, track->title, track->artist, track->album, track->genre);
+            SongList->AddRow(track->title, track->artist, track->album, track->genre);
         tracks = tracks->next;
     }
 }
