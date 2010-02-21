@@ -13,12 +13,12 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="C:\mingw - Copy\include\glib-2.0" />
-					<Add directory="C:\mingw - Copy\lib\glib-2.0\include" />
+					<Add directory="C:\msys\1.0\local\include\glib-2.0" />
+					<Add directory="C:\mingw\lib\glib-2.0\include" />
 				</Compiler>
 				<Linker>
-					<Add library="D:\Projects\C++\iPod_Recovery\tungsten.dll" />
-					<Add library="D:\Projects\C++\iPod_Recovery\libgpod.dll" />
+					<Add library="..\..\libgpod.dll" />
+					<Add library="..\..\tungsten.dll" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -46,19 +46,20 @@
 			<Add library="Comdlg32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="Dialogs.cpp" />
-		<Unit filename="Dialogs.h" />
-		<Unit filename="iphone.cpp" />
-		<Unit filename="iphone.h" />
-		<Unit filename="itdb.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="resource.h" />
-		<Unit filename="resource.rc">
+		<Unit filename="..\..\Dialogs.cpp" />
+		<Unit filename="..\..\Dialogs.h" />
+		<Unit filename="..\..\iTunesMobileDevice.h" />
+		<Unit filename="..\..\iphone.cpp" />
+		<Unit filename="..\..\iphone.h" />
+		<Unit filename="..\..\itdb.h" />
+		<Unit filename="..\..\main.cpp" />
+		<Unit filename="..\..\resource.h" />
+		<Unit filename="..\..\resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="tungsten.h" />
-		<Unit filename="util.cpp" />
-		<Unit filename="util.h" />
+		<Unit filename="..\..\tungsten.h" />
+		<Unit filename="..\..\util.cpp" />
+		<Unit filename="..\..\util.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

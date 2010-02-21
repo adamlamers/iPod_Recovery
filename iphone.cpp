@@ -1,10 +1,13 @@
 #include "tungsten.h"
 #include "itdb.h"
 #include "glib.h"
+#include <windows.h>
+#include <commctrl.h>
 
 extern HWND SongList;
 extern BOOL SongListAddRow(HWND listview, char *name, char *artist, char *album, char *genre);
 extern int DisplayType;
+extern HWND StatusBar;
 
 iPhone *phone;
 Itdb_iTunesDB *itunesdb;
@@ -41,6 +44,7 @@ void NotifyCallback(AMDeviceNotificationCallbackInfo* callback)
             {
                 CreateThread(NULL, 0, ThreadCallback, NULL, 0, NULL);
             }
+            SendMessage(StatusBar, SB_SETTEXT, 0, (LPARAM)"Connected");
         break;
         case Disconnected:
             phone->connected = FALSE;

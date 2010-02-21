@@ -5,7 +5,6 @@
 #define IDD_MAIN                                102
 #define IDR_MAIN_MENU                           103
 #define IDI_APPICON                             106
-#define IDC_SONGCOUNTLABEL                      1000
 #define IDC_SONGLIST                            1001
 #define IDC_SEARCH                              1002
 #define IDC_RADIO1                              1004
