@@ -61,7 +61,7 @@ BOOL InitSongList(HWND hwndDlg)
     SongListContextMenu = CreatePopupMenu();
     InsertMenu(SongListContextMenu, 0, MF_BYPOSITION | MF_STRING, IDM_CONTEXTSAVESONG, "Save Song...");
     InsertMenu(SongListContextMenu, 1, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Check Selected Items");
-    InsertMenu(SongListContextMenu, 2, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Uncheck Selected Items");
+    InsertMenu(SongListContextMenu, 2, MF_BYPOSITION | MF_STRING, IDM_CONTEXTUNCHECKSELECTED, "Uncheck Selected Items");
     
     return TRUE;
 }
@@ -245,11 +245,11 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 return TRUE;
                 
                 case IDM_CONTEXTCHECKSELECTED:
-                    SongListCheckSelectedItems(true);
+                    SongListCheckSelectedItems(TRUE);
                 return TRUE;
                 
                 case IDM_CONTEXTUNCHECKSELECTED:
-                    SongListCheckSelectedItems(false);
+                    SongListCheckSelectedItems(FALSE);
                 return TRUE;
                 
                 case IDM__EXIT1:
