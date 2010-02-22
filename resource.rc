@@ -18,12 +18,26 @@ IDR_MAIN_MENU MENU
 {
     POPUP "&File"
     {
-        MENUITEM "&Exit", IDM__EXIT1
+        MENUITEM "&Exit", IDM_EXIT1
     }
     POPUP "Actions"
     {
         MENUITEM "Save Selected Songs", IDM_SAVE_SELECTED_SONGS1
         MENUITEM "Save All Songs", IDM_SAVE_ALL_SONGS1
+    }
+}
+
+
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+IDR_MENU1 MENU
+{
+    POPUP "x"
+    {
+        MENUITEM "Save Song...", IDM_CONTEXTSAVESONG
+        MENUITEM "Check Selected", IDM_CONTEXTCHECKSELECTED
+        MENUITEM "Uncheck Selected", IDM_CONTEXTUNCHECKSELECTED
+        MENUITEM "IDC_STATUSBAR", IDC_STATUSBAR
     }
 }
 

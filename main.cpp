@@ -1,6 +1,6 @@
-/* File: Dialogs.cpp
- * Creation Date: 12/23/2009
- * Last Modified Date: 2/21/2010
+/* File: main.cpp
+ * Creation Date: December 23rd, 2009
+ * Last Modified Date: February 22nd, 2010
  * Version: 0.0.1
  * Contact: Adam Lamers <adam@millenniumsoftworks.com>
 */
@@ -16,18 +16,15 @@
 #include "iphone.h"
 #include "listview.h"
 #include "util.h"
-#include "resource2.h"
 #include "songlist.h"
+#include "statusbar.h"
 
 HINSTANCE hInst;
 
 CSongList *SongList;
+CStatusBar *StatusBar;
+
 HWND SearchBox;
-HWND StatusBar;
-
-HWND musicRadioButton;
-HWND videoRadioButton;
-
 HMENU SongListContextMenu;
 
 int DisplayType = 0;
@@ -40,33 +37,12 @@ BOOL InitSearchBox(HWND hwndDlg)
     return true;
 }
 
-BOOL SetMenuItemBitmap(HINSTANCE hInstance, HMENU menu, int subitemPosy, int subitemPosx, int resourceID)
-{
-    HBITMAP bitmap = LoadBitmap(hInstance, MAKEINTRESOURCE(resourceID));
-    return SetMenuItemBitmaps(GetSubMenu(menu, subitemPosy), subitemPosx, MF_BYPOSITION, bitmap, bitmap);
-}
-
-BOOL SetWindowIcon(HWND hwnd, HICON icon)
-{
-    return (SetClassLong(hwnd, GCL_HICON, (LONG)icon) != 0);
-}
-
-BOOL InitStatusBar(HWND hwndDlg)
-{
-    int parts[] = {100, 220, -1};
-    StatusBar = CreateWindowEx(0, STATUSCLASSNAME, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0, hwndDlg, (HMENU)IDC_STATUSBAR, GetModuleHandle(NULL), NULL);
-    SendMessage(StatusBar, SB_SETPARTS, sizeof(parts) / sizeof(int), (LPARAM)parts);
-    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)0, (LPARAM)"Disconnected");
-    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)"");
-    return TRUE;
-}
-
 void SongListItemAdded()
 {
     char statusText[256];
     songCount++;
     sprintf(statusText, "%d Items", songCount);
-    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)statusText);
+    StatusBar->SetSegmentText(1, statusText);
 }
 
 BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -79,19 +55,19 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
             SetWindowIcon(hwndDlg, AppIcon);
             SongList = new CSongList(hwndDlg);
             SongList->OnAddItem = &SongListItemAdded;
+            StatusBar = new CStatusBar(hwndDlg);
             InitSearchBox(hwndDlg);
             InitiPhone(hwndDlg);
-            InitStatusBar(hwndDlg);
-            return TRUE;
+        return TRUE;
 
         case WM_CLOSE:
             EndDialog(hwndDlg, 0);
-            return TRUE;
+        return TRUE;
         
         case WM_SIZE:
             SongList->Scale();
-            SendMessage(StatusBar, WM_SIZE, 0, 0);
-            return TRUE;
+            StatusBar->Scale();
+        return TRUE;
 
         case WM_COMMAND:
             switch(LOWORD(wParam))
@@ -153,7 +129,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     SongList->CheckSelectedItems(false);
                 return TRUE;
                 
-                case IDM__EXIT1:
+                case IDM_EXIT1:
                     SendMessage(hwndDlg, WM_CLOSE, 0, 0);
                 return TRUE;
             }
@@ -176,10 +152,18 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                             switch(arg->iSubItem)
                             {
                                 case 0: //Checkboxes, do nothing
+                                break;
                                 case 1: //Name
+                                SongList->Sort(1);
+                                break;
                                 case 2: //Artist
+                                SongList->Sort(2);
+                                break;
                                 case 3: //Album
+                                SongList->Sort(3);
+                                break;
                                 case 4: //Genre
+                                SongList->Sort(4);
                                 break;
                             }
                         }
@@ -188,7 +172,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
                         
             }
-            return TRUE;
+        return TRUE;
     }
     return FALSE;
 }
@@ -197,9 +181,6 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
     hInst = hInstance;
-    INITCOMMONCONTROLSEX InitCtrls;
-    InitCtrls.dwICC = ICC_LISTVIEW_CLASSES | ICC_BAR_CLASSES;
-    InitCtrls.dwSize = sizeof(INITCOMMONCONTROLSEX);
-    InitCommonControlsEx(&InitCtrls);
+    InitCommonCtrls();
     return DialogBox(hInstance, MAKEINTRESOURCE(IDD_MAIN), NULL, DialogProc);
 }

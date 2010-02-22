@@ -6,8 +6,20 @@
 */
 #include "songlist.h"
 
+/* Custom sort instructions to pass to static text compare method. */
+typedef struct
+{
+    HWND handle; /** < Handle to list view */
+    int colIndex; /** < Index of column to sort (zero-indexed) */
+    bool sortDir; /** < Sort direction (true = ascending, false = descending) */
+} ListViewSortInfo;
+
 CSongList::CSongList(HWND Parent) : OnAddItem(NULL)
 {
+    for(unsigned int i = 0; i < (sizeof(colSortDirs) / sizeof(bool)); i++)
+    {
+        colSortDirs[i] = false; /* Initialize them to false */
+    }
     parent = Parent;
     handle = GetDlgItem(parent, IDC_SONGLIST);
     SendMessage(handle, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
@@ -112,6 +124,32 @@ void CSongList::ShowContextMenu()
     }
     
     TrackPopupMenu(ContextMenu, TPM_TOPALIGN | TPM_LEFTALIGN, mouse.x, mouse.y, 0, parent, (RECT*)NULL);
+}
+
+bool CSongList::Sort(int colIndex)
+{
+    colSortDirs[colIndex] = !colSortDirs[colIndex]; //Reverse sort direction
+    char text[32];
+    sprintf(text, "%d", colSortDirs[colIndex]);
+    MessageBox(NULL, text, "", MB_OK);
+    ListViewSortInfo sortinfo;
+    sortinfo.handle = handle;
+    sortinfo.colIndex = colIndex;
+    sortinfo.sortDir = colSortDirs[colIndex];
+    ListView_SortItemsEx(handle, &CSongList::CompareText, &sortinfo);
+    return false;
+}
+
+int CALLBACK CSongList::CompareText(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+    static char buf1[128], buf2[128];
+    ListViewSortInfo *sortinfo = (ListViewSortInfo*)lParamSort;
+    ListView_GetItemText(sortinfo->handle, lParam1, sortinfo->colIndex, buf1, sizeof(buf1));
+    ListView_GetItemText(sortinfo->handle, lParam2, sortinfo->colIndex, buf2, sizeof(buf2));
+    if(sortinfo->sortDir)
+        return(-(strcmp(buf1, buf2)));
+    else
+        return strcmp(buf1, buf2);
 }
 
 HWND CSongList::GetHandle()

@@ -38,6 +38,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="D:\Libs\C\libgpod" />
 		</Compiler>
 		<Linker>
 			<Add library="gdi32" />
@@ -51,12 +52,16 @@
 		<Unit filename="..\..\iTunesMobileDevice.h" />
 		<Unit filename="..\..\iphone.cpp" />
 		<Unit filename="..\..\iphone.h" />
-		<Unit filename="..\..\itdb.h" />
+		<Unit filename="..\..\listview.cpp" />
+		<Unit filename="..\..\listview.h" />
 		<Unit filename="..\..\main.cpp" />
 		<Unit filename="..\..\resource.h" />
 		<Unit filename="..\..\resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="..\..\resource2.h" />
+		<Unit filename="..\..\songlist.cpp" />
+		<Unit filename="..\..\songlist.h" />
 		<Unit filename="..\..\tungsten.h" />
 		<Unit filename="..\..\util.cpp" />
 		<Unit filename="..\..\util.h" />

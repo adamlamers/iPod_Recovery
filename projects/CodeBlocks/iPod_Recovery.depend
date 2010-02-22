@@ -605,7 +605,7 @@
 1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gwin32.h
 	<glib/gtypes.h>
 
-1266782075 source:d:\projects\git\c\ipod_recovery\main.cpp
+1266852460 source:d:\projects\git\c\ipod_recovery\main.cpp
 	<windows.h>
 	<iostream>
 	<commctrl.h>
@@ -615,31 +615,33 @@
 	"iphone.h"
 	"listview.h"
 	"util.h"
-	"resource2.h"
 	"songlist.h"
+	"statusbar.h"
 
 1261607480 d:\projects\git\c\ipod_recovery\dialogs.h
 	<windows.h>
 	<shlobj.h>
 
-1266680261 d:\projects\git\c\ipod_recovery\resource.h
+1266851359 d:\projects\git\c\ipod_recovery\resource.h
 
 1264489640 d:\projects\git\c\ipod_recovery\iphone.h
 	<windows.h>
 	"tungsten.h"
 
-1264489822 d:\projects\git\c\ipod_recovery\util.h
+1266849921 d:\projects\git\c\ipod_recovery\util.h
 	<iostream>
+	<windows.h>
 
-1266680261 source:d:\projects\git\c\ipod_recovery\resource.rc
+1266851359 source:d:\projects\git\c\ipod_recovery\resource.rc
 	<windows.h>
 	<commctrl.h>
 	<richedit.h>
 	"resource.h"
 
-1264490378 source:d:\projects\git\c\ipod_recovery\util.cpp
+1266849912 source:d:\projects\git\c\ipod_recovery\util.cpp
 	<windows.h>
 	<iostream>
+	<commctrl.h>
 
 1261607477 source:d:\projects\git\c\ipod_recovery\dialogs.cpp
 	"Dialogs.h"
@@ -663,13 +665,21 @@
 
 1266779519 d:\projects\git\c\ipod_recovery\resource2.h
 
-1266786009 source:d:\projects\git\c\ipod_recovery\songlist.cpp
+1266852421 source:d:\projects\git\c\ipod_recovery\songlist.cpp
 	"songlist.h"
 
-1266781799 d:\projects\git\c\ipod_recovery\songlist.h
+1266852973 d:\projects\git\c\ipod_recovery\songlist.h
+	<windows.h>
+	<commctrl.h>
+	<cstdio>
+	"resource.h"
+	"listview.h"
+
+1266849571 source:d:\projects\git\c\ipod_recovery\statusbar.cpp
+	"statusbar.h"
+
+1266849292 d:\projects\git\c\ipod_recovery\statusbar.h
 	<windows.h>
 	<commctrl.h>
 	"resource.h"
-	"listview.h"
-	"resource2.h"
 
