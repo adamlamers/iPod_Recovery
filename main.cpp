@@ -33,79 +33,6 @@ HMENU SongListContextMenu;
 int DisplayType = 0;
 int songCount = 0;
 
-
-BOOL InitSongList(HWND hwndDlg)
-{
-    SongList = GetDlgItem(hwndDlg, IDC_SONGLIST);
-    SendMessage(SongList, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
-    ListViewAddColumn(SongList, 0, "", 23);
-    ListViewAddColumn(SongList, 1, "Name", 234);
-    ListViewAddColumn(SongList, 2, "Artist", 234);
-    ListViewAddColumn(SongList, 3, "Album", 234);
-    ListViewAddColumn(SongList, 4, "Genre", 218);
-    
-    SongListContextMenu = CreatePopupMenu();
-    InsertMenu(SongListContextMenu, 0, MF_BYPOSITION | MF_STRING, IDM_CONTEXTSAVESONG, "Save Song...");
-    InsertMenu(SongListContextMenu, 1, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Check Selected Items");
-    InsertMenu(SongListContextMenu, 2, MF_BYPOSITION | MF_STRING, IDM_CONTEXTUNCHECKSELECTED, "Uncheck Selected Items");
-    
-    return TRUE;
-}
-
-void ClearSongList(HWND listview)
-{
-     SendMessage(listview, LVM_DELETEALLITEMS, 0, 0L);
-}
-
-BOOL SongListAddRow(HWND listview, char *name, char *artist, char *album, char *genre)
-{
-    LVITEM item;
-    memset(&item, 0, sizeof(LVITEM));
-    item.mask = LVIF_TEXT;
-    item.iItem = 0;
-    item.iSubItem = 0;
-    item.pszText = "";
-    ListView_InsertItem(listview, &item);
-    
-    item.iSubItem = 1;
-    item.pszText = name;
-    ListView_SetItem(listview, &item);
-    
-    item.iSubItem = 2;
-    item.pszText = artist;
-    ListView_SetItem(listview, &item);
-    
-    item.iSubItem = 3;
-    item.pszText = album;
-    ListView_SetItem(listview, &item);
-    
-    item.iSubItem = 4;
-    item.pszText = genre;
-    ListView_SetItem(listview, &item);
-    
-    char statusText[256];
-    songCount++;
-    sprintf(statusText, "%d Items", songCount);
-    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)statusText);
-    
-    return TRUE;
-}
-
-BOOL ScaleSongList(HWND hwndDlg)
-{
-    RECT windowRect;
-    GetWindowRect(hwndDlg, &windowRect);
-    int width = (windowRect.right - windowRect.left);
-    int height = (windowRect.bottom - windowRect.top);
-    return SetWindowPos(SongList,
-                        HWND_TOP,
-                        0,
-                        25,
-                        width - 16,
-                        height - 103,
-                        SWP_NOZORDER);
-}
-*/
 BOOL InitSearchBox(HWND hwndDlg)
 {
     SearchBox = GetDlgItem(hwndDlg, IDC_SEARCH);
@@ -134,6 +61,14 @@ BOOL InitStatusBar(HWND hwndDlg)
     return TRUE;
 }
 
+void SongListItemAdded()
+{
+    char statusText[256];
+    songCount++;
+    sprintf(statusText, "%d Items", songCount);
+    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)statusText);
+}
+
 BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch(uMsg)
@@ -143,6 +78,7 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
             HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_APPICON));
             SetWindowIcon(hwndDlg, AppIcon);
             SongList = new CSongList(hwndDlg);
+            SongList->OnAddItem = &SongListItemAdded;
             InitSearchBox(hwndDlg);
             InitiPhone(hwndDlg);
             InitStatusBar(hwndDlg);

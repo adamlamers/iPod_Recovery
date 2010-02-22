@@ -24,6 +24,8 @@ class CSongList
     HMENU ContextMenu;
     
     public:
+        void(*OnAddItem)();
+    
         CSongList(HWND Parent);
         void Clear();
         bool AddRow(char *name, char *artist, char *album, char *genre);

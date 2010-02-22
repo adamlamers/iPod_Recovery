@@ -6,7 +6,7 @@
 */
 #include "songlist.h"
 
-CSongList::CSongList(HWND Parent)
+CSongList::CSongList(HWND Parent) : OnAddItem(NULL)
 {
     parent = Parent;
     handle = GetDlgItem(parent, IDC_SONGLIST);
@@ -18,7 +18,7 @@ CSongList::CSongList(HWND Parent)
     ListViewAddColumn(handle, 4, "Genre", 218);
     
     ContextMenu = CreatePopupMenu();
-    InsertMenu(ContextMenu, 0, MF_BYPOSITION | MF_STRING, IDM_CONTEXTSAVESONG, "Save Song...");
+    InsertMenu(ContextMenu, 0, MF_BYPOSITION | MF_STRING, IDM_CONTEXTSAVESONG, "Save Song(s)...");
     InsertMenu(ContextMenu, 1, MF_BYPOSITION | MF_STRING, IDM_CONTEXTCHECKSELECTED, "Check Selected Items");
     InsertMenu(ContextMenu, 2, MF_BYPOSITION | MF_STRING, IDM_CONTEXTUNCHECKSELECTED, "Uncheck Selected Items");
     
@@ -38,32 +38,26 @@ bool CSongList::AddRow(char *name, char *artist, char *album, char *genre)
     item.iItem = 0;
     item.iSubItem = 0;
     item.pszText = "";
-    ListView_InsertItem(handle, &item);
+    if(ListView_InsertItem(handle, &item) == -1) return false;
     
     item.iSubItem = 1;
     item.pszText = name;
-    ListView_SetItem(handle, &item);
+    if(ListView_SetItem(handle, &item) == -1) return false;
     
     item.iSubItem = 2;
     item.pszText = artist;
-    ListView_SetItem(handle, &item);
+    if(ListView_SetItem(handle, &item) == -1) return false;
     
     item.iSubItem = 3;
     item.pszText = album;
-    ListView_SetItem(handle, &item);
+    if(ListView_SetItem(handle, &item) == -1) return false;
     
     item.iSubItem = 4;
     item.pszText = genre;
-    ListView_SetItem(handle, &item);
+    if(ListView_SetItem(handle, &item) == -1) return false;
     
-    /*
-    char statusText[256];
-    songCount++;
-    sprintf(statusText, "%d Items", songCount);
-    SendMessage(StatusBar, SB_SETTEXT, (WPARAM)1, (LPARAM)statusText);
-    */
-     
-    return TRUE;
+    if(OnAddItem)OnAddItem();
+    return true;
 }
 
 void CSongList::Scale()

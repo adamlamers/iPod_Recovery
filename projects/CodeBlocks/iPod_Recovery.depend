@@ -321,7 +321,7 @@
 1264489822 d:\projects\c++\ipod_recovery\util.h
 	<iostream>
 
-1266780609 source:d:\projects\git\c\ipod_recovery\iphone.cpp
+1266781449 source:d:\projects\git\c\ipod_recovery\iphone.cpp
 	"tungsten.h"
 	"itdb.h"
 	"glib.h"
@@ -605,7 +605,7 @@
 1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gwin32.h
 	<glib/gtypes.h>
 
-1266780638 source:d:\projects\git\c\ipod_recovery\main.cpp
+1266782075 source:d:\projects\git\c\ipod_recovery\main.cpp
 	<windows.h>
 	<iostream>
 	<commctrl.h>
@@ -663,10 +663,10 @@
 
 1266779519 d:\projects\git\c\ipod_recovery\resource2.h
 
-1266780342 source:d:\projects\git\c\ipod_recovery\songlist.cpp
+1266786009 source:d:\projects\git\c\ipod_recovery\songlist.cpp
 	"songlist.h"
 
-1266780718 d:\projects\git\c\ipod_recovery\songlist.h
+1266781799 d:\projects\git\c\ipod_recovery\songlist.h
 	<windows.h>
 	<commctrl.h>
 	"resource.h"
