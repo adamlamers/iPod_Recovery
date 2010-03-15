@@ -321,19 +321,20 @@
 1264489822 d:\projects\c++\ipod_recovery\util.h
 	<iostream>
 
-1266781449 source:d:\projects\git\c\ipod_recovery\iphone.cpp
+1268665618 source:d:\projects\git\c\ipod_recovery\iphone.cpp
 	"tungsten.h"
 	"itdb.h"
 	"glib.h"
 	<windows.h>
 	<commctrl.h>
 	"songlist.h"
+	"statusbar.h"
 
-1264218442 d:\projects\git\c\ipod_recovery\tungsten.h
+1264222042 d:\projects\git\c\ipod_recovery\tungsten.h
 	<windows.h>
 	"iTunesMobileDevice.h"
 
-1263845530 d:\projects\git\c\ipod_recovery\itunesmobiledevice.h
+1263849130 d:\projects\git\c\ipod_recovery\itunesmobiledevice.h
 
 1264485504 d:\projects\git\c\ipod_recovery\itdb.h
 	<config.h>
@@ -341,7 +342,7 @@
 	<time.h>
 	<glib.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib.h
 	<glib/galloca.h>
 	<glib/garray.h>
 	<glib/gasyncqueue.h>
@@ -400,212 +401,212 @@
 	<glib/gutils.h>
 	<glib/gwin32.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\galloca.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\galloca.h
 	<glib/gtypes.h>
 	<alloca.h>
 	<malloc.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gtypes.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gtypes.h
 	<glibconfig.h>
 	<glib/gmacros.h>
 
-1260308296 c:\mingw\lib\glib-2.0\include\glibconfig.h
+1260311896 c:\mingw\lib\glib-2.0\include\glibconfig.h
 	<glib/gmacros.h>
 	<limits.h>
 	<float.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmacros.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmacros.h
 	<stddef.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\garray.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\garray.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gasyncqueue.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gasyncqueue.h
 	<glib/gthread.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gthread.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gthread.h
 	<glib/gerror.h>
 	<glib/gtypes.h>
 	<glib/gutils.h>
 	<glib/gatomic.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gerror.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gerror.h
 	<stdarg.h>
 	<glib/gquark.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gquark.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gquark.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gutils.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gutils.h
 	<glib/gtypes.h>
 	<stdarg.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gatomic.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gatomic.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gbacktrace.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gbacktrace.h
 	<glib/gtypes.h>
 	<signal.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gbase64.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gbase64.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gbookmarkfile.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gbookmarkfile.h
 	<glib/gerror.h>
 	<time.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gcache.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gcache.h
 	<glib/glist.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\glist.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\glist.h
 	<glib/gmem.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmem.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmem.h
 	<glib/gslice.h>
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gslice.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gslice.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gchecksum.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gchecksum.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gcompletion.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gcompletion.h
 	<glib/glist.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gconvert.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gconvert.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gdataset.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gdataset.h
 	<glib/gquark.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gdate.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gdate.h
 	<time.h>
 	<glib/gtypes.h>
 	<glib/gquark.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gdir.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gdir.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gfileutils.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gfileutils.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\ghash.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\ghash.h
 	<glib/gtypes.h>
 	<glib/glist.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\ghook.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\ghook.h
 	<glib/gmem.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\ghostutils.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\ghostutils.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\giochannel.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\giochannel.h
 	<glib/gconvert.h>
 	<glib/gmain.h>
 	<glib/gstring.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmain.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmain.h
 	<glib/gpoll.h>
 	<glib/gslist.h>
 	<glib/gthread.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gpoll.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gpoll.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gslist.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gslist.h
 	<glib/gmem.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gstring.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gstring.h
 	<glib/gtypes.h>
 	<glib/gunicode.h>
 	<glib/gutils.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gunicode.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gunicode.h
 	<glib/gerror.h>
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gkeyfile.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gkeyfile.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmappedfile.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmappedfile.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmarkup.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmarkup.h
 	<stdarg.h>
 	<glib/gerror.h>
 	<glib/gslist.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gmessages.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gmessages.h
 	<stdarg.h>
 	<glib/gtypes.h>
 	<glib/gmacros.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gnode.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gnode.h
 	<glib/gmem.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\goption.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\goption.h
 	<glib/gerror.h>
 	<glib/gquark.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gpattern.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gpattern.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gprimes.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gprimes.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gqsort.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gqsort.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gqueue.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gqueue.h
 	<glib/glist.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\grand.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\grand.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\grel.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\grel.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gregex.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gregex.h
 	<glib/gerror.h>
 	<glib/gstring.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gscanner.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gscanner.h
 	<glib/gdataset.h>
 	<glib/ghash.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gsequence.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gsequence.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gshell.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gshell.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gspawn.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gspawn.h
 	<glib/gerror.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gstrfuncs.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gstrfuncs.h
 	<stdarg.h>
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gtestutils.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gtestutils.h
 	<glib.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gthreadpool.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gthreadpool.h
 	<glib/gthread.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gtimer.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gtimer.h
 	<glib/gtypes.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gtree.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gtree.h
 	<glib/gnode.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gurifuncs.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gurifuncs.h
 	<glib.h>
 
-1260308358 c:\msys\1.0\local\include\glib-2.0\glib\gwin32.h
+1260311958 c:\msys\1.0\local\include\glib-2.0\glib\gwin32.h
 	<glib/gtypes.h>
 
-1266852460 source:d:\projects\git\c\ipod_recovery\main.cpp
+1268659271 source:d:\projects\git\c\ipod_recovery\main.cpp
 	<windows.h>
 	<iostream>
 	<commctrl.h>
@@ -618,35 +619,35 @@
 	"songlist.h"
 	"statusbar.h"
 
-1261607480 d:\projects\git\c\ipod_recovery\dialogs.h
+1261611080 d:\projects\git\c\ipod_recovery\dialogs.h
 	<windows.h>
 	<shlobj.h>
 
-1266851359 d:\projects\git\c\ipod_recovery\resource.h
+1266938281 d:\projects\git\c\ipod_recovery\resource.h
 
-1264489640 d:\projects\git\c\ipod_recovery\iphone.h
+1264493240 d:\projects\git\c\ipod_recovery\iphone.h
 	<windows.h>
 	"tungsten.h"
 
-1266849921 d:\projects\git\c\ipod_recovery\util.h
+1266853521 d:\projects\git\c\ipod_recovery\util.h
 	<iostream>
 	<windows.h>
 
-1266851359 source:d:\projects\git\c\ipod_recovery\resource.rc
+1266891248 source:d:\projects\git\c\ipod_recovery\resource.rc
 	<windows.h>
 	<commctrl.h>
 	<richedit.h>
 	"resource.h"
 
-1266849912 source:d:\projects\git\c\ipod_recovery\util.cpp
+1266853512 source:d:\projects\git\c\ipod_recovery\util.cpp
 	<windows.h>
 	<iostream>
 	<commctrl.h>
 
-1261607477 source:d:\projects\git\c\ipod_recovery\dialogs.cpp
+1261611077 source:d:\projects\git\c\ipod_recovery\dialogs.cpp
 	"Dialogs.h"
 
-1249765746 d:\libs\c\libgpod\itdb.h
+1249769346 d:\libs\c\libgpod\itdb.h
 	<config.h>
 	<sys/types.h>
 	<time.h>
@@ -656,29 +657,32 @@
 	<windows.h>
 	<commctrl.h>
 
-1266778647 source:d:\projects\git\c\ipod_recovery\listview.cpp
+1266782247 source:d:\projects\git\c\ipod_recovery\listview.cpp
 	<windows.h>
 	<commctrl.h>
 
-1266778805 d:\projects\git\c\ipod_recovery\listview.h
+1266782405 d:\projects\git\c\ipod_recovery\listview.h
 	<windows.h>
 
 1266779519 d:\projects\git\c\ipod_recovery\resource2.h
 
-1266852421 source:d:\projects\git\c\ipod_recovery\songlist.cpp
+1268665543 source:d:\projects\git\c\ipod_recovery\songlist.cpp
 	"songlist.h"
 
-1266852973 d:\projects\git\c\ipod_recovery\songlist.h
+1268665502 d:\projects\git\c\ipod_recovery\songlist.h
 	<windows.h>
 	<commctrl.h>
 	<cstdio>
+	<vector>
+	<list>
+	<itdb.h>
 	"resource.h"
 	"listview.h"
 
-1266849571 source:d:\projects\git\c\ipod_recovery\statusbar.cpp
+1266853171 source:d:\projects\git\c\ipod_recovery\statusbar.cpp
 	"statusbar.h"
 
-1266849292 d:\projects\git\c\ipod_recovery\statusbar.h
+1266852892 d:\projects\git\c\ipod_recovery\statusbar.h
 	<windows.h>
 	<commctrl.h>
 	"resource.h"

@@ -14,6 +14,9 @@
 #include <windows.h>
 #include <commctrl.h>
 #include <cstdio>
+#include <vector>
+#include <list>
+#include <itdb.h>
 #include "resource.h"
 #include "listview.h"
 
@@ -22,8 +25,9 @@ class CSongList
     HWND handle;
     HWND parent;
     HMENU ContextMenu;
+    std::list<Itdb_Track*> *tracks;
     bool colSortDirs[5];
-    static int CompareText(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
+    static int SortCallback(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
     
     public:
         void(*OnAddItem)();
@@ -34,6 +38,10 @@ class CSongList
         void Scale();
         void CheckSelectedItems(bool check);
         void ShowContextMenu();
+        void ContextSaveSong();
+        
+        std::vector<int> GetSelected();
+        void SetTrackList(std::list<Itdb_Track*> *list);
         bool Sort(int columnIndex);
         HWND GetHandle();
        ~CSongList();

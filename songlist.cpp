@@ -14,7 +14,7 @@ typedef struct
     bool sortDir; /** < Sort direction (true = ascending, false = descending) */
 } ListViewSortInfo;
 
-CSongList::CSongList(HWND Parent) : OnAddItem(NULL)
+CSongList::CSongList(HWND Parent) : tracks(NULL), OnAddItem(NULL)
 {
     for(unsigned int i = 0; i < (sizeof(colSortDirs) / sizeof(bool)); i++)
     {
@@ -68,7 +68,7 @@ bool CSongList::AddRow(char *name, char *artist, char *album, char *genre)
     item.pszText = genre;
     if(ListView_SetItem(handle, &item) == -1) return false;
     
-    if(OnAddItem)OnAddItem();
+    if(OnAddItem) OnAddItem();
     return true;
 }
 
@@ -129,18 +129,15 @@ void CSongList::ShowContextMenu()
 bool CSongList::Sort(int colIndex)
 {
     colSortDirs[colIndex] = !colSortDirs[colIndex]; //Reverse sort direction
-    char text[32];
-    sprintf(text, "%d", colSortDirs[colIndex]);
-    MessageBox(NULL, text, "", MB_OK);
     ListViewSortInfo sortinfo;
     sortinfo.handle = handle;
     sortinfo.colIndex = colIndex;
     sortinfo.sortDir = colSortDirs[colIndex];
-    ListView_SortItemsEx(handle, &CSongList::CompareText, &sortinfo);
+    ListView_SortItemsEx(handle, &CSongList::SortCallback, &sortinfo);
     return false;
 }
 
-int CALLBACK CSongList::CompareText(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+int CALLBACK CSongList::SortCallback(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 {
     static char buf1[128], buf2[128];
     ListViewSortInfo *sortinfo = (ListViewSortInfo*)lParamSort;
@@ -157,4 +154,44 @@ HWND CSongList::GetHandle()
     return handle;
 }
 
-CSongList::~CSongList(){}
+void CSongList::ContextSaveSong()
+{
+    std::vector<int> selectedItems = GetSelected();
+    if(tracks)
+    {
+        MessageBox(NULL, ((Itdb_Track*)(tracks->front()))->title, ((Itdb_Track*)(tracks->front()))->ipod_path, MB_OK);
+    }
+}
+
+std::vector<int> CSongList::GetSelected()
+{
+    std::vector<int> ret;
+    int ItemCount = ListView_GetItemCount(handle);
+    int i;
+    for(i = 0; i < ItemCount; i++)
+    {
+        LVITEM item;
+        memset(&item, 0, sizeof(item));
+        item.iItem = i;
+        item.mask = LVIF_STATE;
+        item.stateMask = LVIS_SELECTED;
+        if(ListView_GetItem(handle, &item))
+        {
+            if(item.state == LVIS_SELECTED)
+            {
+                ret.push_back(i);
+            }
+        }
+    }
+    return ret;
+}
+
+void CSongList::SetTrackList(std::list<Itdb_Track*> *list)
+{
+    tracks = list;
+}
+
+CSongList::~CSongList()
+{
+    if(tracks) delete tracks;
+}

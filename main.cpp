@@ -118,7 +118,8 @@ BOOL CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 return TRUE;
                 
                 case IDM_CONTEXTSAVESONG:
-                    MessageBox(NULL, "Context Save Song", "", MB_OK);
+                    //MessageBox(NULL, "Context Save Song", "", MB_OK);
+                    SongList->ContextSaveSong();
                 return TRUE;
                 
                 case IDM_CONTEXTCHECKSELECTED:

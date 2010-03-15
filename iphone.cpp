@@ -11,6 +11,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include "songlist.h"
+#include "statusbar.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -23,25 +24,28 @@ extern void __declspec(dllimport) ConvertiTunesCDB(char *filePath, char *newFile
 
 extern CSongList *SongList;
 extern int DisplayType;
-extern HWND StatusBar;
+extern CStatusBar *StatusBar;
 
 iPhone *phone;
 Itdb_iTunesDB *itunesdb;
 
 void FetchITunesDB()
 {
+    std::list <Itdb_Track*> *tracksList = new std::list<Itdb_Track*>;
     iPhone_CopyFileFromDevice(phone, "/private/var/mobile/Media/iTunes_Control/iTunes/iTunesCDB", "iTunesCDB");
     ConvertiTunesCDB("iTunesCDB", "iTunesDB");
     itunesdb = itdb_parse_file("iTunesDB", NULL);
     GList *tracks = itunesdb->tracks;
     Itdb_Track *track;
-    while(tracks->next != NULL)
+    while(tracks != NULL)
     {
         track = (Itdb_Track*)tracks->data;
+        tracksList->push_back(track);
         //if(track->mediatype & ITDB_MEDIATYPE_AUDIO)
             SongList->AddRow(track->title, track->artist, track->album, track->genre);
         tracks = tracks->next;
     }
+    SongList->SetTrackList(tracksList);
 }
 
 DWORD WINAPI ThreadCallback(void *param)
@@ -60,10 +64,11 @@ void NotifyCallback(AMDeviceNotificationCallbackInfo* callback)
             {
                 CreateThread(NULL, 0, ThreadCallback, NULL, 0, NULL);
             }
-            SendMessage(StatusBar, SB_SETTEXT, 0, (LPARAM)"Connected");
+            StatusBar->SetSegmentText(0, "Connected");
         break;
         case Disconnected:
             phone->connected = FALSE;
+            StatusBar->SetSegmentText(0, "Disconnected");
         break;
         default:
         break;

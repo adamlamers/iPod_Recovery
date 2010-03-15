@@ -59,9 +59,10 @@
 		<Unit filename="..\..\resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="..\..\resource2.h" />
 		<Unit filename="..\..\songlist.cpp" />
 		<Unit filename="..\..\songlist.h" />
+		<Unit filename="..\..\statusbar.cpp" />
+		<Unit filename="..\..\statusbar.h" />
 		<Unit filename="..\..\tungsten.h" />
 		<Unit filename="..\..\util.cpp" />
 		<Unit filename="..\..\util.h" />

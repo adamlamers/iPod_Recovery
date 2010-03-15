@@ -10,12 +10,12 @@
 #define IDM_CONTEXTSAVESONG                     789
 #define IDM_CONTEXTUNCHECKSELECTED              790
 #define IDM_CONTEXTCHECKSELECTED                791
-#define IDC_RADIO2                              792
 #define IDC_SONGLIST                            1001
 #define IDC_SEARCH                              1002
 #define IDC_RADIO1                              1004
+#define IDC_RADIO2                              1005
+#define IDC_RADIO3                              1006
 #define IDM_EXIT1                               40000
 #define IDM_SAVE_SELECTED_SONGS1                40001
 #define IDM_SAVE_ALL_SONGS1                     40002
-#define IDC_RADIO3                              40003
 #define IDC_STATUSBAR                           40004
